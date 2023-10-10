@@ -1,0 +1,22 @@
+#submitSchool, #editSchool{
+    padding-bottom:30px;
+}
+.schoolForm, #editSchoolForm {
+    padding: 30px;
+}
+#backToAllSchool{
+    margin-left: 80%;
+}
+div #submitEditForm{
+    margin-top: 50px;
+}
+#coverLogo, #coverSignature {
+    width: 150px;
+    height: 150px;
+    background-color: rgba(255, 255, 255, 0.6);
+    position: absolute;
+    top: 0px;
+    font-size: 10px;
+    text-align: center;
+    line-height: 100px;
+}

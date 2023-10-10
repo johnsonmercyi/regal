@@ -1,0 +1,293 @@
+html,
+body,
+* {
+  box-sizing: border-box;
+  margin    : 0;
+  padding   : 0;
+}
+
+body {
+  font-family: 'Segoe UI';
+  font-weight: 400;
+}
+
+.container,
+.container * {
+  /* border: 1px dotted rgb(255, 0, 106); */
+}
+
+.container,
+.result-sheet,
+.result-sheet .header,
+.result-sheet .header .school-name-logo-wrapper,
+.result-sheet .header .school-name-logo-wrapper .school-name-title-wrapper,
+.result-sheet .header span.school-name,
+.result-sheet .header span.title,
+.details,
+.details table tr,
+.details table td.item,
+.result-sheet .content,
+.result-sheet .content .scores,
+.result-sheet .content .scores .subject-category,
+.result-sheet .content .scores .subjects,
+.result-sheet .content .scores .subjects .subject,
+.result-sheet .content .scores .subjects .subject .name,
+.result-sheet .content .scores .subjects .subject .score,
+.footer,
+.footer .keys,
+.footer .keys .title,
+.footer .keys .wrapper {
+  display        : flex;
+  flex-direction : column;
+  justify-content: center;
+  align-items    : center;
+}
+
+.container {
+  width  : 90%;
+  margin : auto;
+  padding: 2vw 0;
+}
+
+.result-sheet {
+  width: 100%;
+}
+
+.result-sheet .header {
+  width : 100%;
+  height: auto;
+
+  margin-bottom: 2vw;
+}
+
+.result-sheet .header .school-name-logo-wrapper {
+  width : 100%;
+  height: 13vw;
+
+  flex-direction: row;
+
+  margin-bottom: 2vw;
+}
+
+.result-sheet .header .school-name-logo-wrapper .logo {
+  width: 12vw;
+  height: 12.5vw;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.result-sheet .header .school-name-logo-wrapper .school-name-title-wrapper {
+  width : 100%;
+  height: 100%;
+}
+
+.result-sheet .header span.school-name {
+  width : 100%;
+  height: auto;
+
+  font-size  : 3vw;
+  font-weight: 600;
+
+  text-align: center;
+
+  color: rgb(0, 119, 188);
+}
+
+.result-sheet .header span.title {
+  width : 100%;
+  height: auto;
+
+  font-size  : 2.3vw;
+  font-weight: 600;
+
+  color: rgb(233, 1, 136);
+}
+
+.details {
+  width  : 100%;
+  padding: 0 1.5vw;
+}
+
+.details-1 {
+  margin-top: 1vw;
+}
+
+.details table {
+  width           : 100%;
+  /* padding-right: 0.5vw; */
+}
+
+.details table tr {
+  justify-content: space-between !important;
+}
+
+.details table td.item {
+  width: auto;
+
+  flex-direction : row;
+  justify-content: flex-start;
+  align-items    : flex-end;
+
+  padding: 0 1vw 0 0;
+}
+
+.details table td.item .label {
+  width      : auto;
+  font-size  : 1.6vw;
+  font-weight: 600;
+  margin     : 0 0.5vw;
+  color      : rgb(0, 119, 188);
+}
+
+.details table td.item .val {
+  width    : auto;
+  color    : gray;
+  font-size: 1.7vw;
+
+  border-bottom: 0.1vw solid black;
+  text-align   : center;
+
+  padding: 0 0 0 0vw;
+}
+
+
+
+.details table tr {
+  width: 100%;
+
+  flex-direction : row;
+  justify-content: center;
+
+  margin: 1vw 0;
+}
+
+.result-sheet .content {
+  width  : 100%;
+  padding: 0 2.5vw;
+}
+
+.result-sheet .content .scores {
+  width : 100%;
+  height: auto;
+
+  margin: 0 0 1vw 0;
+}
+
+.result-sheet .content .scores .subject-category {
+  width          : 100%;
+  flex-direction : row;
+  justify-content: flex-start;
+
+  font-size  : 2.3vw;
+  font-weight: 600;
+
+  color: rgb(233, 1, 136);
+}
+
+.result-sheet .content .scores .subjects {
+  width: 100%;
+}
+
+.result-sheet .content .scores .subjects .subject {
+  width : 100%;
+  height: 2.5vw;
+
+  flex-direction : row;
+  justify-content: space-between;
+
+  margin: 0.5vw 0;
+}
+
+.bullet {
+  width : 1vw;
+  height: 1vw;
+
+  border-top   : 2px solid black;
+  border-right : 2px dotted black;
+  border-bottom: 2px dotted black;
+  border-left  : 2px solid black;
+}
+
+.result-sheet .content .scores .subjects .subject .name {
+  width          : 100%;
+  height         : auto;
+  flex-direction : row;
+  justify-content: flex-start;
+
+  font-size: 1.8vw;
+
+  padding-left: 1vw;
+}
+
+.result-sheet .content .scores .subjects .subject .score {
+  width : 5vw;
+  height: 100%;
+
+  font-size: 1.8vw;
+
+  border: 0.2vw solid black;
+}
+
+.footer {
+  width  : 100%;
+  padding: 2vw 2.5vw;
+}
+
+.footer .keys {
+  width: 100%;
+  background: linear-gradient(-45deg, rgba(0, 0, 0, 0.11) 50%, rgba(0, 0, 0, 0.15) 50%),
+    linear-gradient(-45deg, transparent 52%, rgba(0, 0, 0, 0.1) 48%),
+    linear-gradient(-45deg, transparent 54%, rgba(0, 0, 0, 0.05) 46%);
+  padding: 2vw;
+
+  border-radius: 1.5vw;
+}
+
+.footer .keys .title {
+  width          : 100%;
+  flex-direction : row;
+  justify-content: flex-start;
+
+  font-size  : 1.5vw;
+  font-weight: 600;
+
+  color: rgb(233, 1, 136);
+}
+
+.footer .keys .wrapper {
+  width       : 100%;
+  height      : auto;
+  font-size   : 1.2vw;
+  padding-left: 1vw;
+
+  flex-direction : row;
+  justify-content: flex-start;
+
+  margin: 0.5vw 0;
+}
+
+.footer .keys .wrapper .key {
+  width  : auto;
+  padding: 0 1vw;
+}
+
+.footer .keys .wrapper .key span {
+  font-weight: 700;
+}
+
+@media print {
+  .footer .keys {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust        : exact;
+  }
+
+  .val {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust        : exact;
+    color                     : gray !important;
+    border-bottom             : 0.1vw solid black !important;
+  }
+}

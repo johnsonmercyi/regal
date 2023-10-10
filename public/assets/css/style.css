@@ -1,0 +1,586 @@
+html, body {
+    /* background-color: #f3f3f3; */
+    color: #000;
+    font-family: Roboto, 'Open Sans' !important;
+    height: 100vh;
+    background-color: #f0f1f3 !important;
+    margin: 0;
+}
+
+@font-face{
+    font-family: Roboto;
+    src: url("RobotoFont/Roboto-Regular.ttf") format('truetype');
+    src: url("RobotoFont/roboto-v20-latin-regular.woff") format('woff');
+}
+
+.main-container {
+    width: 98%;
+    margin: auto;
+}
+
+.padSide {
+    padding-left: 250px;
+}
+
+.showOver{
+    overflow: visible !important;
+}
+
+.modal.show {
+    display: block;
+}
+
+#schoolInfo{
+    height: auto;
+    font-size: 1rem;
+    margin: 0px;
+    text-align:center;
+}
+
+header{
+    margin-left: 250px;
+}
+
+main{
+    background-color: #f0f1f3;
+    margin-top: 0;
+    height: 100vh;
+}
+
+.row/*, form*/{
+    background-color: white;
+}
+
+.greyBack{
+    background-color: #f0f1f3;    
+}
+
+#sideHead{
+    display: flex;
+    justify-content: space-between;
+    height: 64px;
+    /* background-color: #03a9f4; */
+    color: white;
+    text-emphasis: wrap;
+    padding: 10px;
+}
+
+.side-info{
+    font-weight: bolder;
+    font-size: 1rem;
+}
+
+#schoolBadge{
+    width: 3rem;
+    height: 3rem;
+}
+
+#menuSide{
+    padding-top: 0px !important;
+    white-space: nowrap;
+    height: 100%;
+    /* margin-top: 104px !important; */
+    width: 250px !important;
+    text-align:left !important;
+    scrollbar-width: none;
+    /* overflow: scroll !important; */
+    /* backface-visibility: visible !important; */
+    transform: translateX(0%);
+}
+
+@media screen and (max-width: 650px){
+    #menuSide{
+        width: 80% !important;
+    }
+
+    .padSide {
+        padding-left: 0px;
+    }
+}
+
+@media print{
+    #menuSide {display: none;}
+}
+
+.bottomdash{
+    border-bottom:0.08rem black dashed !important;
+}
+
+.thinrow{
+    padding:0px !important;
+}
+
+.rowBord{
+    border-bottom:0.1rem solid black !important;
+}
+/* #menuSide .sideLi{
+    background: rgb(195, 211, 202);
+} */
+
+#menuSide .collapsible-header{
+    font-weight: bold;
+    color: #d7d7d7;
+    padding: 0 10px !important;
+}
+
+#menuSide .collapsible-header ul li{
+    color: #d7d7d7;
+}
+
+.collapsible-body ul li a{
+    color: #d7d7d7;
+}
+
+#menuSide::-webkit-scrollbar{
+    width: .2rem;
+    background-color:#d3d3d3;
+}
+
+#menuSide::-webkit-scrollbar-thumb{
+    background-color: #8b8686;
+}
+
+#menuSideBtn{
+    vertical-align: middle;
+}
+
+#menuSideBtn:hover{
+    cursor: pointer;
+}
+
+#preloaderCon{
+    background-color: #d7d7d7;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.preloader-wrapper{
+    vertical-align: middle;
+    /* width: 20% !important; */
+}
+
+.modal.hide {
+    display: none;
+}
+
+.modal.modal-fixed-footer .modal-footer {
+    border-top: 0px;
+    border-bottom: 0px;
+    position: absolute;
+    bottom: 0;
+}
+
+.form-container {
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+}
+
+img.default-img {
+    opacity: 0.3;
+    padding: 0px;
+    width: 50%;
+}
+
+button.btn:active,
+a.btn:active {
+    color: #fff;
+}
+
+.object-table-wrapper {
+    width: 80%;
+    margin: auto;
+}
+
+a.waves-effect {
+    margin: 0px;
+}
+
+nav {
+    box-sizing: border-box;
+}
+
+#startbutton:hover{
+    cursor: pointer;
+}
+
+/* Scroll Bar */
+tbody::-webkit-scrollbar-track,
+.modal::-webkit-scrollbar-track {
+    /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); */
+    background-color: #FFFFFF;
+}
+
+tbody::-webkit-scrollbar,
+.modal::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+    /* background-color: #F5F5F5; */
+}
+
+tbody::-webkit-scrollbar-thumb,
+.modal::-webkit-scrollbar-thumb {
+    background-color: #555555;
+    border: 2px solid #555555;
+    border-radius: 5px;
+}
+
+.datatableContainer {
+    margin-top: 20px;
+}
+
+/* div.input-field {
+    margin-top: 5px;
+    margin-bottom: 5px;
+} */
+
+/* Margin Top Utility */
+.mt-0 {
+    margin-top: 0px;
+}
+.mt-1 {
+    margin-top: 2px;
+}
+.mt-2 {
+    margin-top: 4px;
+}
+.mt-3 {
+    margin-top: 6px;
+}
+.mt-4 {
+    margin-top: 8px;
+}
+.mt-5 {
+    margin-top: 10px;
+}
+
+
+/* Margin Bottom Utility */
+.mb-0 {
+    margin-bottom: 0px;
+}
+.mb-1 {
+    margin-bottom: 2px;
+}
+.mb-2 {
+    margin-bottom: 4px;
+}
+.mb-3 {
+    margin-bottom: 6px;
+}
+.mb-4 {
+    margin-bottom: 8px;
+}
+.mb-5 {
+    margin-bottom: 20px;
+}
+
+@media only screen and (max-width : 600px) {
+    nav {
+        height: 65px;
+    }
+
+    .form-container {
+        width: 100%;
+    }
+
+    .resp-btn {
+        margin-bottom: 5px;
+        display: block;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width : 700px) {
+
+    .modal.modal-fixed-footer .modal-footer {
+        border-top: 1px solid rgba(0,0,0,0.1);
+        position: absolute;
+        bottom: 0;
+    }
+}
+
+@media only screen and (min-width: 650px) {
+    .modal::-webkit-scrollbar-track {
+        /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); */
+        /* background-color: #F5F5F5; */
+    }
+
+    .modal::-webkit-scrollbar {
+        width: 4px;
+        /* background-color: #F5F5F5; */
+    }
+
+    .modal::-webkit-scrollbar-thumb {
+        background-color: #555555;
+        border: 2px solid #555555;
+        border-radius: 5px;
+    }
+}
+
+/*
+    Materilize Input Fields Validation Css
+*/
+/* label color */
+.input-field label {
+    color: #666;
+}
+/* label focus color */
+.input-field input[type=text]:focus + label {
+    color: teal;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus {
+    border-bottom: 1px solid teal;
+    box-shadow: 0 1px 0 0 teal;
+}
+
+/* valid color */
+.input-field input[type=text].valid,
+.input-field input[type=email].valid {
+    border-bottom: 1px solid #00c853;
+    box-shadow: 0 1px 0 0 #00c853;
+}
+/* invalid color */
+.input-field input[type=text].invalid,
+.input-field input[type=email].invalid,
+select.invalid {
+    border-bottom: 1px solid tomato;
+    box-shadow: 0 1px 0 0 tomato;
+}
+/* icon prefix focus color */
+.input-field .prefix.active {
+    color: teal;
+}
+
+.invalidBorder{
+    color: red !important;
+    border-color: red !important;
+}
+
+.invalidBorder::placeholder{
+    color: red !important;
+}
+
+#addForm{
+    padding: 2rem !important;
+    border-radius: .5rem !important;
+    margin-bottom: 4rem;
+    background-color:none;
+}
+
+#addForm select{
+    text-transform: capitalize;
+    border-bottom: .08rem solid #9e9e9e;
+}
+#addForm select option{
+    text-transform: capitalize;
+}
+
+main table tbody{
+    background-color: white !important;
+}
+
+.form-section{
+    padding: 2rem;
+    border-radius: .5rem;
+}
+
+.card-panel{
+    border-radius: .5rem;
+}
+
+.flexspace{
+    display:flex; 
+    justify-content: flex-start;
+}
+
+.flexspace:hover{
+    background-color: #d3d3d3;
+}
+
+.flexspace .pagecut{
+    margin-right:2rem;
+}
+
+.pagecut{
+    height:3rem; width:3rem;display:flex; justify-content:center;align-items:center;
+}
+
+.greyInp{
+    border: 0px !important;
+    border-radius: .3rem !important;
+    background-color: #d3d3d3 !important;
+}
+
+.greyInp::placeholder{
+    color: #ababab;
+}
+
+
+.remRow:hover, .remHigher:hover{
+    cursor:pointer;
+}
+
+.titext{
+    font-weight: bolder;
+}
+
+.certView:hover{
+    cursor: pointer;
+}
+
+.modal td, .modal th {
+    padding: 5px 5px !important;
+}
+
+#certTable table td{
+    padding: 0px !important;
+}
+#certTable table th{
+    padding: 0px !important;
+}
+#certTable table tr{
+    border: none !important;
+}
+
+#loginContainer{
+    background-image: url('../img/basilica.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@media only screen and (max-width: 1024px) {
+    .loginContainer {
+      position: relative;
+      height: auto;
+    }
+}
+.loginFrame {
+    height: 70%;
+    width: 70%;
+    background-color: rgb(0,0,0,0.5);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    padding: 50px;
+  }
+  @media only screen and (max-width: 575px) {
+    .loginFrame {
+      padding: 50px 20px;
+    }
+  }
+  .loginFrame .login-box {
+    min-width: 470px;
+    padding: 6rem 7rem;
+    border-radius: 4px;
+    background-color: #ffffff;
+    -webkit-box-shadow: 0px 5px 49px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 5px 49px 0px rgba(0, 0, 0, 0.5);
+    margin-bottom: 30px;
+  }
+  @media only screen and (max-width: 575px) {
+    .loginFrame .login-box {
+      min-width: 300px;
+      padding: 6rem 4rem;
+    }
+  }
+  @media only screen and (max-width: 479px) {
+    .loginFrame .login-box {
+      padding: 6rem 2rem;
+    }
+  }
+
+  
+.input-container {
+    /* background-color: blue; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 5px;/*The bottom border of the field contained here is visible beyond the edges of this container so should hide*/
+}
+
+.input-container input[type="text"],
+.input-container input[type="password"]  {
+    margin: 0px;
+    border-color: #f0f1f3;
+    color: #fff;
+    text-align: center;
+    /* letter-spacing: 3px; */
+}
+
+.input-container input[type="text"]::placeholder,
+.input-container input[type="password"]::placeholder  {
+    letter-spacing: 3px;
+    color: #fff;
+
+}
+
+#loginSubmit{
+    font-weight: bolder;
+    margin-top: 1rem;
+    background: none !important;
+    border: 2px solid white;
+    border-radius: 4px;
+    width: 100%;
+}
+
+#loginSubmit:hover {
+    background-color: white !important;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+select {
+    font-family: Roboto;
+}
+
+@keyframes hideSmooth {
+    0% {
+        opacity: 1;
+        height: 100%;
+    }
+    50% {
+        opacity:0.5;
+        height: 50%
+    }
+    75% {
+        opacity: 0;
+        height: 10%;
+    }
+    100% {
+        margin: 0px;
+        padding: 0px;
+        opacity: 0;
+        height: 0px;
+    }
+}
+
+.hideAnimate{
+    animation: hideSmooth;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}
+
+.padBott{
+    padding-bottom: 3rem;
+}

@@ -1,0 +1,193 @@
+.student-display {
+  width: 80%;
+  height: auto;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  
+  /* background-color: white; */
+  border-radius: 1vw;
+  /* box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); */
+  padding-bottom: 2vw;
+
+  font-family: 'Segoe UI';
+
+  position: relative;
+  opacity: 0;
+
+  margin: auto;
+}
+
+.student-display.record-not-found {
+  width:  100%;
+  height: auto;
+  padding: 2vw;
+
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+
+  background-color: white;
+  border-radius: 1vw;
+
+  font-size: 1.2rem;
+  font-weight: 400;
+  color:rgb(89, 89, 89);
+}
+
+.student-display .title {
+  width:  100%;
+  height: auto;
+  margin-bottom: 2vw;
+
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 2rem;
+  font-weight: 600;
+  color:rgb(45, 40, 56);
+}
+
+.student-display .student-card {
+  width: 100%;
+  height: 8rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  border-bottom: 1px dotted gray;
+  padding: 2vw;
+
+  position: relative;
+  opacity: 0;
+
+  background-color: white;
+
+}
+
+.student-display .student-card .student {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.student-display .student-card .student .name {
+  width: 100%;
+  height: auto;
+
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: rgb(45, 40, 56);
+
+  text-align: left;
+
+  letter-spacing: 1px;
+}
+
+.student-display .student-card .student .reg-no {
+  font-family: Tahoma;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: teal;
+}
+
+.student-display .button-wrapper {
+  width: 15vw;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.student-display .button-wrapper .view-result-btn {
+  width: 100%;
+  height: 2.5rem;
+
+  background-color: teal;
+  border-radius: 0.5vw;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: Tahoma;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: white;
+
+  cursor: pointer;
+
+  transition: all .3s ease-in-out;
+}
+
+.student-display .button-wrapper .view-result-btn:hover {
+  background-color: rgb(66, 66, 66);
+}
+
+.student-display .button-wrapper .view-result-btn:active {
+  background-color: rgb(44, 44, 44);
+}
+
+.spinner-wrapper {
+  width: 100%;
+  height: auto;
+
+  padding: 2vw;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+  opacity: 0;
+}
+
+.spinner-wrapper .spinner {
+  width: 2rem;
+  height: 2rem;
+
+  border-top: 4px solid transparent;
+  border-right: 4px solid rgb(255, 1, 149);
+  border-bottom: 4px solid rgb(255, 1, 149);
+  border-left: 4px solid rgb(255, 1, 149);
+
+  border-radius: 100%;
+}
+
+@media(max-width: 576px) {
+  .student-display {
+    width: 98%;
+  }
+
+  .student-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .student-display .button-wrapper {
+    width: 100%;
+    height: 100%;
+
+    padding: 2vw 0;
+  }
+  
+  .student-display .button-wrapper .view-result-btn {
+    width: 100%;
+    height: 2.5rem;
+  
+    border-radius: 0.8vw;
+  }
+}
+
