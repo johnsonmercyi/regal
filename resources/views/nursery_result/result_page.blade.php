@@ -95,17 +95,19 @@
               </td>
             </tr>
 
-            <tr>
-              <td class="item item-1 width_100">
-                @foreach($classTeachers as $key => $category)
-
-                @endforeach
-                <div class="label label-1" style="width: 15vw;">CLASS TEACHER:</div>
-                <div class="val val-1" style="width: 100%; text-align: left">
-
-                  {{count($classTeacher) > 0 ? $classTeacher[0]->name : ""}}
-                </div>
-              </td>
+            <tr style="display: flex; flex-direction: column; align-items: flex-start;">
+              @foreach($classTeachers as $key => $classTeacher)
+                <?php 
+                  $margin = "margin-bottom";
+                  if ($key) $margin = "margin-top";
+                ?>
+                <td class="item item-1 width_100" style="{{$margin}}: 0.5vw">
+                  <div class="label label-1" style="width: 18vw;">CLASS TEACHER {{$key + 1}}:</div>
+                  <div class="val val-1" style="width: 100%; text-align: left">
+                    {{$classTeacher ? $classTeacher->name : ""}}
+                  </div>
+                </td>
+              @endforeach
             </tr>
 
             <tr>
