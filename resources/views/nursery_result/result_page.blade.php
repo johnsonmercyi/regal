@@ -97,6 +97,9 @@
 
             <tr>
               <td class="item item-1 width_100">
+                @foreach($classTeachers as $key => $category)
+
+                @endforeach
                 <div class="label label-1" style="width: 15vw;">CLASS TEACHER:</div>
                 <div class="val val-1" style="width: 100%; text-align: left">
 

@@ -84,7 +84,7 @@ class NurseryResultController extends Controller
         AND term_id=$termId
         AND student_id=$studentId");
 
-        $classTeacher = DB::select("SELECT concat(ifnull(firstName, ''), ' ', ifnull(lastName, ''), ' ', ifnull(otherNames, '')) name
+        $classTeachers = DB::select("SELECT concat(ifnull(firstName, ''), ' ', ifnull(lastName, ''), ' ', ifnull(otherNames, '')) name
         FROM form_teachers
         INNER JOIN staff ON form_teachers.staff_id = staff.id
         WHERE academic_session_id=$sessionId
@@ -100,7 +100,7 @@ class NurseryResultController extends Controller
 
         // substr_replace("", "", 0, 7);
 
-        return view('nursery_result.result_page', compact('term', 'session', 'studentName', 'studentClass', 'age', 'subjectCategories', 'subjects', 'startDate', 'comments', 'classTeacher', 'shwData', 'school'));
+        return view('nursery_result.result_page', compact('term', 'session', 'studentName', 'studentClass', 'age', 'subjectCategories', 'subjects', 'startDate', 'comments', 'classTeachers', 'shwData', 'school'));
     }
 
     public function fetchStudents()
