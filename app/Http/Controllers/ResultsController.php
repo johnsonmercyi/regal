@@ -306,7 +306,7 @@ class ResultsController extends Controller
 
         $shwData = DB::select("SELECT h1, h2, w1, w2 FROM students_hw WHERE student_id=$student->id AND academic_session_id=$formItems[sessionId] AND term=$formItems[termId]");
 
-        // dd($shwData, $formItems['sessionId'], $formItems['termId']);
+        dd($shwData);
 
         return response()->json([
                                 'studentRes'=>$studentDetails, 
@@ -597,6 +597,12 @@ class ResultsController extends Controller
                         ])->get();
         // dd($formTeacher);
         $teacherDetails = ['schoolHead'=>$classroom->SchoolSection->sectionHead, 'schoolHeadSign'=>$classroom->SchoolSection->sectionHeadSign, 'formTeacher'=>$formTeacher];
+        
+        // $student = Student::where([['school_id', '=', $school->id], ['id', '=', $student]])->first();
+        
+        $shwData = DB::select("SELECT h1, h2, w1, w2 FROM students_hw WHERE student_id=$student[id] AND academic_session_id=$formItems[sessionId] AND term=$formItems[termId]");
+        
+        // dd($shwData, $student['id']);
 
         return response()->json(['studentRes'=>$studentDetails, 
                                 'subjectRes'=>$subjectNames, 
@@ -607,6 +613,7 @@ class ResultsController extends Controller
                                 'teacherDetails'=>$teacherDetails,
                                 'gradingFormat'=>$gradingFormat,
                                 // 'resumeDate'=>$resumeDate,
+                                'shw'=>$shwData
                                 ]);
     }
 
@@ -702,6 +709,16 @@ class ResultsController extends Controller
                             ->whereIn('id', $idArray)
                             ->orderBy('lastName', 'ASC')
                             ->get();
+
+                            
+        $shwData = DB::table('students_hw')->select('h1', 'h2', 'w1', 'w2')->where('school_id', $formItems['schoolId'])
+        ->where('academic_session_id', $formItems['sessionId'])
+        ->where('term', $formItems['termId'])
+        ->whereIn('student_id', $idArray)->get();
+        
+        // dd($shwData);
+        // $shwData = DB::select("SELECT h1, h2, w1, w2 FROM students_hw WHERE student_id=$student[id] AND academic_session_id=$formItems[sessionId] AND term=$formItems[termId]");
+
         // $subjectNames = DB::table('subjects')->select('id', 'title', 'code')->whereIn('id', $subjectArray)->orderBy('result_order', 'ASC')->get();
         $subjectNames = DB::table('subjects')->select('subjects.id', 'subjects.code', 'subjects.title', 'staff.signature', 'student_subjects.staff_id')
                         ->leftJoin('student_subjects', 'student_subjects.subject_id', '=', 'subjects.id')
@@ -742,6 +759,8 @@ class ResultsController extends Controller
         // dd($schoolTraits);
         $teacherDetails = ['schoolHead'=>$classroom->SchoolSection->sectionHead, 'schoolHeadSign'=>$classroom->SchoolSection->sectionHeadSign, 'formTeacher'=>$formTeacher];
 
+        // dd("SHW: ", $shwData);
+
         return response()->json(['studentRes'=>$studentDetails, 
                                 'subjectRes'=>$subjectNames, 
                                 'resultRes'=>$allScores, 
@@ -756,6 +775,7 @@ class ResultsController extends Controller
                                 // 'classIdList'=>$idArray,
                                 'gradingFormat'=>$gradingFormat,
                                 // 'resumeDate'=>$resumeDate,
+                                'shw'=>$shwData
                                 ]);
     }
 

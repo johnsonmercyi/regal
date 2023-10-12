@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function (event) {
   classStudentsListTitle.innerHTML = "Class Students";
   classStudentsListTitle.classList.add('title');
 
-
   init();//initialize
 
   loadStudents && loadStudents.addEventListener('click', e => {
@@ -203,7 +202,6 @@ document.addEventListener('DOMContentLoaded', function (event) {
     viewResultBtn.classList.add('view-result-btn');
     viewResultBtn.setAttribute("data-student", studentObj);
     viewResultBtn.innerHTML = "View Result";
-
 
     viewResultBtn.addEventListener('click', () => {
       window.open(`student_result_view?st_id=${studentObj.id}&r_no=${studentObj.regNo}&cl_id=${studentObj.class_id}&se_id=${studentObj.session_id}&tm_id=${studentObj.term_id}`, '_blank');
