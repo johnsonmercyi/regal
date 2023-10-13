@@ -634,7 +634,6 @@ document.addEventListener('DOMContentLoaded', function () {
             teacherDetails: classResponse.teacherDetails,
             gradingFormat: classResponse.gradingFormat,
             resumeDate: classResponse.resumeDate,
-            shw: classResponse.shw
         };
 
 
@@ -653,7 +652,6 @@ document.addEventListener('DOMContentLoaded', function () {
     /***********RUNCTION TO BUIILD FINAL RESULT SHEET******************** */
     function resultSheetFunction(resp, positionedRes, overAllResult) {
 
-
         let studentDetails = resp.studentRes.filter(student => student.id == resp.selectedStudent[0].student_id);
         // console.log(studentDetails);
         let studentPositionedRes = positionedRes.filter(res => res.id == studentDetails[0].id);
@@ -665,7 +663,6 @@ document.addEventListener('DOMContentLoaded', function () {
         let marksObtain = studentPositionedRes[0].MarksObtainable;
         let passOrFail = '-';
         let checkAnnual = classChoiceForm.termId == '4';
-
 
         let h1, h2, w1, w2, shw;
         if (resp.shw.length) {
