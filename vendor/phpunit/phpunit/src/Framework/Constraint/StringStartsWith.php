@@ -9,7 +9,8 @@
  */
 namespace PHPUnit\Framework\Constraint;
 
-use PHPUnit\Util\InvalidArgumentHelper;
+use function strpos;
+use PHPUnit\Framework\InvalidArgumentException;
 
 /**
  * Constraint that asserts that the string it is evaluated for begins with a
@@ -24,8 +25,8 @@ final class StringStartsWith extends Constraint
 
     public function __construct(string $prefix)
     {
-        if (\strlen($prefix) === 0) {
-            throw InvalidArgumentHelper::factory(1, 'non-empty string');
+        if ($prefix === '') {
+            throw InvalidArgumentException::create(1, 'non-empty string');
         }
 
         $this->prefix = $prefix;
@@ -47,6 +48,6 @@ final class StringStartsWith extends Constraint
      */
     protected function matches($other): bool
     {
-        return \strpos((string) $other, $this->prefix) === 0;
+        return strpos((string) $other, $this->prefix) === 0;
     }
 }

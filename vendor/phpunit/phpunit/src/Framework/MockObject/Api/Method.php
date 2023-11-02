@@ -9,7 +9,9 @@
  */
 namespace PHPUnit\Framework\MockObject;
 
-use PHPUnit\Framework\MockObject\Matcher\AnyInvokedCount;
+use function call_user_func_array;
+use function func_get_args;
+use PHPUnit\Framework\MockObject\Rule\AnyInvokedCount;
 
 /**
  * @internal This trait is not covered by the backward compatibility promise for PHPUnit
@@ -20,9 +22,9 @@ trait Method
     {
         $expects = $this->expects(new AnyInvokedCount);
 
-        return \call_user_func_array(
+        return call_user_func_array(
             [$expects, 'method'],
-            \func_get_args()
+            func_get_args()
         );
     }
 }
