@@ -593,6 +593,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let resultTab = window.open("", "window=200,height=100");
         resultTab.focus();
 
+        // console.log(resp);
         let finalResultSheet = classResultSheet(resp);
 
         // const resultComments = buildResultComments(resp.studentComments);
@@ -634,6 +635,7 @@ document.addEventListener('DOMContentLoaded', function () {
             teacherDetails: classResponse.teacherDetails,
             gradingFormat: classResponse.gradingFormat,
             resumeDate: classResponse.resumeDate,
+            shw: classResponse.shw
         };
 
 
