@@ -11,8 +11,7 @@ class AddSectionHeadIdToTermlyComments extends Migration
    *
    * @return void
    */
-  public function up()
-  {
+  public function up() {
     Schema::table('termly_comments', function (Blueprint $table) {
       $table->unsignedBigInteger('sectionHeadId')->nullable()->after('student_id');
     });
