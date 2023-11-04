@@ -379,7 +379,7 @@
 <li class="{{ $sch_col }}  lighten-1"><a href="/{{ $school->id }}/students/remove">Remove Student</a></li>
 <li class="{{ $sch_col }}  lighten-1"><a href="/{{ $school->id }}/staff/remove">Remove Staff</a></li>
 <li class="{{ $sch_col }}  lighten-1"><a href="/{{ $school->id }}/section/create">Create School Section</a></li>
-<li class="{{ $sch_col }}  lighten-1"><a href="/{{ $school->id }}/section_heads/create">Manage Section Heads</a></li>
+<li class="{{ $sch_col }}  lighten-1"><a href="/{{ $school->id }}/section_heads/index">Manage Section Heads</a></li>
 <li class="{{ $sch_col }}  lighten-1"><a href="/{{ $school->id }}/class/create">Create Class</a></li>
 <li class="{{ $sch_col }}  lighten-1"><a href="/{{ $school->id }}/student/term/status">Manage Active Students</a></li>
 <li class="{{ $sch_col }}  lighten-1"><a href="/{{$school->id}}/results/manage">Manage Results</a></li>

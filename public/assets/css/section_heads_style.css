@@ -1,0 +1,278 @@
+.section-heads,
+.shd-section {
+  width : 100%;
+  height: auto;
+
+  display        : flex;
+  flex-direction : column;
+  align-items    : center;
+  justify-content: flex-start;
+}
+
+span {
+  padding: 0 !important;
+}
+
+.shd-section {
+  width: 95%
+}
+
+.shd-section .title-bar {
+  width : 100%;
+  height: 4rem;
+
+  display        : flex;
+  justify-content: center;
+  align-items    : center;
+
+  font-size  : 1.5rem;
+  font-weight: 600;
+}
+
+.shd-section .add-new-button-bar {
+  width          : auto;
+  height         : auto;
+  display        : flex;
+  justify-content: center;
+  align-items    : center;
+
+  position: relative;
+}
+
+.shd-section .add-new-button-bar .add-new-btn {
+  width : 3rem;
+  height: 3rem;
+
+  background-color: tomato;
+  color           : white;
+
+  display        : flex;
+  justify-content: center;
+  align-items    : center;
+
+  border-radius: 100%;
+  box-shadow   : 1px 1px 3px rgba(0, 0, 0, 0.5);
+
+  cursor    : pointer;
+  transition: all .3s ease-in-out;
+
+  position: fixed;
+  right   : 3%;
+  bottom  : 2%;
+}
+
+.shd-section .add-new-button-bar .add-new-btn:hover {
+  background-color: rgb(249, 89, 61);
+}
+
+.shd-section .add-new-button-bar .add-new-btn::before {
+  content  : "+";
+  font-size: 1.5rem;
+}
+
+.empty-data-set {
+  width : 100%;
+  height: 3rem;
+  color : gray;
+
+  display        : flex;
+  justify-content: center;
+  align-items    : center;
+
+  background-color: rgb(255, 250, 244);
+  border-radius   : 0.3rem;
+}
+
+.data-bar {
+  width : 100%;
+  height: 9rem;
+
+  display        : flex;
+  flex-direction : column;
+  justify-content: center;
+  align-items    : center;
+
+  background-color: rgb(255, 250, 244);
+  border-radius   : 0.3rem;
+  box-shadow      : 1px 1px 2px rgba(0, 0, 0, 0.1);
+
+  padding: 1rem;
+  margin: 0.2rem 0;
+
+  cursor: pointer;
+
+  transition: all .3s ease-in-out;
+}
+
+.data-bar:hover {
+  background-color: rgb(255, 248, 240);
+}
+
+.data-bar .name,
+.data-bar .section {
+  width : 100%;
+  height: auto;
+
+  font-size: 1.2rem;
+
+  display        : flex;
+  justify-content: center;
+  align-items    : center;
+
+  margin: 0.15rem 0;
+}
+
+.data-bar .section {
+  height   : auto;
+  font-size: 0.9rem;
+  color: rgb(81, 81, 81);
+}
+
+.data-bar .action-btns {
+  width : 100%;
+  height: 100%;
+
+  display        : flex;
+  justify-content: center;
+  align-items    : center;
+}
+
+.data-bar .edit-btn,
+.data-bar .delete-btn {
+  width : 2rem;
+  height: 2rem;
+
+  color        : white;
+  border-radius: 0.4rem;
+
+  display        : flex;
+  justify-content: center;
+  align-items    : center;
+
+  font-size: 1.3rem;
+
+  padding: 0.25rem 0.25rem;
+
+  margin: 0 0.25rem;
+}
+
+.data-bar .edit-btn {
+  background-color: rgba(105, 132, 189);
+}
+
+.data-bar .delete-btn {
+  background-color: rgba(255, 94, 99);
+}
+
+.data-bar .separator {
+  display: none;
+}
+
+
+
+@media (min-width: 547px) {
+
+  .section-heads,
+  .shd-section {
+    width : 100%;
+    height: auto;
+
+    display        : flex;
+    flex-direction : column;
+    align-items    : center;
+    justify-content: flex-start;
+  }
+
+  .shd-section {
+    width: 80%
+  }
+
+  .shd-section .add-new-button-bar {
+    width          : 100%;
+    height         : 4rem;
+    display        : flex;
+    justify-content: flex-end;
+    align-items    : center;
+  }
+
+  .shd-section .add-new-button-bar .add-new-btn {
+    width : 9rem;
+    height: 2.5rem;
+
+    border-radius: 0.3rem;
+
+    position: relative;
+    right   : 0;
+    bottom  : 0;
+  }
+
+  .shd-section .add-new-button-bar .add-new-btn::before {
+    content  : "ADD NEW";
+    font-size: 1rem;
+  }
+
+  .data-bar {
+    height: 3.5rem;
+
+    flex-direction: row;
+
+    padding: 0 1rem;
+  }
+
+
+  .data-bar .action-btns {
+    width: auto;
+  }
+
+  .data-bar .name,
+  .data-bar .section {
+    height         : 100%;
+    justify-content: flex-start;
+  }
+
+  .data-bar .section {
+    width    : 20rem;
+    font-size: 1rem;
+  }
+
+  .data-bar .action-btns .edit-btn,
+  .data-bar .action-btns .delete-btn {
+    padding         : 0;
+    background-color: transparent;
+
+    width : auto;
+    height: auto;
+
+    font-size: 1.5rem;
+
+    transition: all 0.3s ease-in-out;
+  }
+
+  .data-bar .action-btns .edit-btn {
+    color: rgba(105, 132, 189);
+  }
+
+  .data-bar .action-btns .edit-btn:hover {
+    color: rgb(68, 87, 128);
+  }
+
+  .data-bar .action-btns .delete-btn {
+    color: rgba(255, 94, 99);
+  }
+
+  .data-bar .action-btns .delete-btn:hover {
+    color: rgb(173, 64, 68);
+  }
+
+  .data-bar .separator {
+    width : auto;
+    height: 100%;
+
+    display        : flex;
+    justify-content: center;
+    align-items    : center;
+
+    padding: 0 1rem !important;
+    color  : rgb(175, 175, 175);
+  }
+}

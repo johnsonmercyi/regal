@@ -12,6 +12,13 @@ DELETE FROM school_sections WHERE id=4;
 
 INSERT INTO form_teachers (global_id, academic_session_id, school_id, class_id, staff_id)
 VALUES (NULL, 10, 1, 7, 1009);
+
+INSERT INTO section_heads (global_id, section_id, school_id, name, signature)
+VALUES (NULL, 1, 1, 'Johnson Mercy Ibenye', '');
+INSERT INTO section_heads (global_id, section_id, school_id, name, signature)
+VALUES (NULL, 2, 1, 'John Doe', '');
+INSERT INTO section_heads (global_id, section_id, school_id, name, signature)
+VALUES (NULL, 3, 1, 'Mary Jane', '');
 # TEST END
 
 # In the Laravel project
