@@ -17,10 +17,10 @@
   <section class="shd-section shd-section-2">
     <?php
     if (count($sectionHeads)) {
-      foreach($sectionHeads as $sectionHead) {
+      foreach ($sectionHeads as $sectionHead) {
         echo '<div class="data-bar">
-          <span class="name">'. $sectionHead->name.'</span> 
-          <span class="section">'.strtolower($sectionHead->section_name).'</span> 
+          <span class="name">' . $sectionHead->name . '</span> 
+          <span class="section">' . strtolower($sectionHead->section_name) . '</span> 
           <span class="separator">|</span>
           <div class="action-btns">
             <i class="material-icons center edit-btn" title="Edit Record">
@@ -38,6 +38,11 @@
     }
     ?>
   </section>
+
+  <input type="hidden" id="schoolId" value="{{ $school->id}}">
+  <input type="hidden" id="sessionId" value="{{ $school->academic_session_id}}">
+  <input type="hidden" id="termId" value="{{ $school->current_term_id}}">
+  <script src="{{ asset('assets/js/sectionHeads.js')}}"></script>
 </main>
 
 @endsection

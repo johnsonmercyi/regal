@@ -18,7 +18,7 @@ class SectionHeadsController extends Controller
       $sectionHeads = DB::select("SELECT sh.name, ss.sectionName section_name FROM section_heads sh
       INNER JOIN school_sections ss ON sh.section_id = ss.id");
     } catch (\Throwable $e) {
-      # code...
+      return $request->json(["error" => $e->getMessage()]);
     }
     return view('section_heads.index', compact('school', 'sectionHeads'));
   }
