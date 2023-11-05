@@ -39,6 +39,12 @@
     ?>
   </section>
 
+  <section class="shd-section create-dialog-wrapper">
+    <div class="create-dialog">
+      Dialog!
+    </div>
+  </section>
+
   <input type="hidden" id="schoolId" value="{{ $school->id}}">
   <input type="hidden" id="sessionId" value="{{ $school->academic_session_id}}">
   <input type="hidden" id="termId" value="{{ $school->current_term_id}}">
