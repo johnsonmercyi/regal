@@ -9,7 +9,12 @@
  */
 namespace PHPUnit\Framework\MockObject;
 
+use function array_diff;
+use function array_merge;
+use function sprintf;
 use PHPUnit\Framework\TestCase;
+use ReflectionClass;
+use ReflectionException;
 
 /**
  * @psalm-template MockedType
@@ -27,9 +32,14 @@ final class MockBuilder
     private $type;
 
     /**
-     * @var string[]
+     * @var null|string[]
      */
     private $methods = [];
+
+    /**
+     * @var bool
+     */
+    private $emptyMethodsArray = false;
 
     /**
      * @var string
@@ -67,7 +77,7 @@ final class MockBuilder
     private $callOriginalMethods = false;
 
     /**
-     * @var object
+     * @var ?object
      */
     private $proxyTarget;
 
@@ -85,11 +95,6 @@ final class MockBuilder
      * @var Generator
      */
     private $generator;
-
-    /**
-     * @var bool
-     */
-    private $alreadyUsedMockMethodConfiguration = false;
 
     /**
      * @param string|string[] $type
@@ -114,7 +119,7 @@ final class MockBuilder
     {
         $object = $this->generator->getMock(
             $this->type,
-            $this->methods,
+            !$this->emptyMethodsArray ? $this->methods : null,
             $this->constructorArgs,
             $this->mockClassName,
             $this->originalConstructor,
@@ -188,50 +193,53 @@ final class MockBuilder
      * Specifies the subset of methods to mock. Default is to mock none of them.
      *
      * @deprecated https://github.com/sebastianbergmann/phpunit/pull/3687
+     *
+     * @return $this
      */
-    public function setMethods(array $methods = null): self
+    public function setMethods(?array $methods = null): self
     {
-        $this->methods = $methods;
-
-        $this->alreadyUsedMockMethodConfiguration = true;
+        if ($methods === null) {
+            $this->methods = $methods;
+        } else {
+            $this->methods = array_merge($this->methods ?? [], $methods);
+        }
 
         return $this;
     }
 
     /**
-     * Specifies the subset of methods to mock, requiring each to exist in the class
+     * Specifies the subset of methods to mock, requiring each to exist in the class.
      *
      * @param string[] $methods
      *
      * @throws RuntimeException
+     *
+     * @return $this
      */
     public function onlyMethods(array $methods): self
     {
-        if ($this->alreadyUsedMockMethodConfiguration) {
-            throw new RuntimeException(
-                \sprintf(
-                    'Cannot use onlyMethods() on "%s" mock because mocked methods were already configured.',
-                    $this->type
-                )
-            );
+        if (empty($methods)) {
+            $this->emptyMethodsArray = true;
+
+            return $this;
         }
 
-        $this->alreadyUsedMockMethodConfiguration = true;
-
         try {
-            $reflector = new \ReflectionClass($this->type);
-        } catch (\ReflectionException $e) {
+            $reflector = new ReflectionClass($this->type);
+            // @codeCoverageIgnoreStart
+        } catch (ReflectionException $e) {
             throw new RuntimeException(
                 $e->getMessage(),
-                (int) $e->getCode(),
+                $e->getCode(),
                 $e
             );
         }
+        // @codeCoverageIgnoreEnd
 
         foreach ($methods as $method) {
             if (!$reflector->hasMethod($method)) {
                 throw new RuntimeException(
-                    \sprintf(
+                    sprintf(
                         'Trying to set mock method "%s" with onlyMethods, but it does not exist in class "%s". Use addMethods() for methods that don\'t exist in the class.',
                         $method,
                         $this->type
@@ -240,46 +248,45 @@ final class MockBuilder
             }
         }
 
-        $this->methods = $methods;
+        $this->methods = array_merge($this->methods ?? [], $methods);
 
         return $this;
     }
 
     /**
-     * Specifies methods that don't exist in the class which you want to mock
+     * Specifies methods that don't exist in the class which you want to mock.
      *
      * @param string[] $methods
      *
      * @throws RuntimeException
+     *
+     * @return $this
      */
     public function addMethods(array $methods): self
     {
-        if ($this->alreadyUsedMockMethodConfiguration) {
-            throw new RuntimeException(
-                \sprintf(
-                    'Cannot use addMethods() on "%s" mock because mocked methods were already configured.',
-                    $this->type
-                )
-            );
+        if (empty($methods)) {
+            $this->emptyMethodsArray = true;
+
+            return $this;
         }
 
-        $this->alreadyUsedMockMethodConfiguration = true;
-
         try {
-            $reflector = new \ReflectionClass($this->type);
-        } catch (\ReflectionException $e) {
+            $reflector = new ReflectionClass($this->type);
+            // @codeCoverageIgnoreStart
+        } catch (ReflectionException $e) {
             throw new RuntimeException(
                 $e->getMessage(),
-                (int) $e->getCode(),
+                $e->getCode(),
                 $e
             );
         }
+        // @codeCoverageIgnoreEnd
 
         foreach ($methods as $method) {
             if ($reflector->hasMethod($method)) {
                 throw new RuntimeException(
-                    \sprintf(
-                        'Trying to set mock method "%s" with addMethod, but it exists in class "%s". Use onlyMethods() for methods that exist in the class.',
+                    sprintf(
+                        'Trying to set mock method "%s" with addMethods(), but it exists in class "%s". Use onlyMethods() for methods that exist in the class.',
                         $method,
                         $this->type
                     )
@@ -287,7 +294,7 @@ final class MockBuilder
             }
         }
 
-        $this->methods = $methods;
+        $this->methods = array_merge($this->methods ?? [], $methods);
 
         return $this;
     }
@@ -298,7 +305,7 @@ final class MockBuilder
     public function setMethodsExcept(array $methods = []): self
     {
         return $this->setMethods(
-            \array_diff(
+            array_diff(
                 $this->generator->getClassMethods($this->type),
                 $methods
             )
@@ -307,6 +314,8 @@ final class MockBuilder
 
     /**
      * Specifies the arguments for the constructor.
+     *
+     * @return $this
      */
     public function setConstructorArgs(array $args): self
     {
@@ -317,6 +326,8 @@ final class MockBuilder
 
     /**
      * Specifies the name for the mock class.
+     *
+     * @return $this
      */
     public function setMockClassName(string $name): self
     {
@@ -327,6 +338,8 @@ final class MockBuilder
 
     /**
      * Disables the invocation of the original constructor.
+     *
+     * @return $this
      */
     public function disableOriginalConstructor(): self
     {
@@ -337,6 +350,8 @@ final class MockBuilder
 
     /**
      * Enables the invocation of the original constructor.
+     *
+     * @return $this
      */
     public function enableOriginalConstructor(): self
     {
@@ -347,6 +362,8 @@ final class MockBuilder
 
     /**
      * Disables the invocation of the original clone constructor.
+     *
+     * @return $this
      */
     public function disableOriginalClone(): self
     {
@@ -357,6 +374,8 @@ final class MockBuilder
 
     /**
      * Enables the invocation of the original clone constructor.
+     *
+     * @return $this
      */
     public function enableOriginalClone(): self
     {
@@ -367,6 +386,8 @@ final class MockBuilder
 
     /**
      * Disables the use of class autoloading while creating the mock object.
+     *
+     * @return $this
      */
     public function disableAutoload(): self
     {
@@ -377,6 +398,8 @@ final class MockBuilder
 
     /**
      * Enables the use of class autoloading while creating the mock object.
+     *
+     * @return $this
      */
     public function enableAutoload(): self
     {
@@ -387,6 +410,8 @@ final class MockBuilder
 
     /**
      * Disables the cloning of arguments passed to mocked methods.
+     *
+     * @return $this
      */
     public function disableArgumentCloning(): self
     {
@@ -397,6 +422,8 @@ final class MockBuilder
 
     /**
      * Enables the cloning of arguments passed to mocked methods.
+     *
+     * @return $this
      */
     public function enableArgumentCloning(): self
     {
@@ -407,6 +434,8 @@ final class MockBuilder
 
     /**
      * Enables the invocation of the original methods.
+     *
+     * @return $this
      */
     public function enableProxyingToOriginalMethods(): self
     {
@@ -417,6 +446,8 @@ final class MockBuilder
 
     /**
      * Disables the invocation of the original methods.
+     *
+     * @return $this
      */
     public function disableProxyingToOriginalMethods(): self
     {
@@ -428,6 +459,8 @@ final class MockBuilder
 
     /**
      * Sets the proxy target.
+     *
+     * @return $this
      */
     public function setProxyTarget(object $object): self
     {
@@ -436,6 +469,9 @@ final class MockBuilder
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function allowMockingUnknownTypes(): self
     {
         $this->allowMockingUnknownTypes = true;
@@ -443,6 +479,9 @@ final class MockBuilder
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function disallowMockingUnknownTypes(): self
     {
         $this->allowMockingUnknownTypes = false;
@@ -450,6 +489,9 @@ final class MockBuilder
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function enableAutoReturnValueGeneration(): self
     {
         $this->returnValueGeneration = true;
@@ -457,6 +499,9 @@ final class MockBuilder
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function disableAutoReturnValueGeneration(): self
     {
         $this->returnValueGeneration = false;
