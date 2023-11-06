@@ -32,13 +32,13 @@
                         <label for="otherName">Name of Section Head</label>
                     </div>
                     <div class="file-field input-field col s12 l6">
-                    <div class="btn {{ $school->themeColor }} lighten-1">
-                        <span>Upload Signature</span>
-                        <input type="file"  accept="image/*" name="sectionHeadSign" id="sectionHeadSign" >
-                    </div>
-                    <div class="file-path-wrapper">
-                        <input class="file-path validate"  type="text" placeholder="Signature of Section Head">
-                    </div>
+                      <div class="btn {{ $school->themeColor }} lighten-1">
+                          <span>Upload Signature</span>
+                          <input type="file"  accept="image/*" name="sectionHeadSign" id="sectionHeadSign" >
+                      </div>
+                      <div class="file-path-wrapper">
+                          <input class="file-path validate"  type="text" placeholder="Signature of Section Head">
+                      </div>
                     </div>
                     <!-- <div class="file-field input-field col s12 m6">
                         <input type="file" name="secsectionHeadSign" class="validate">

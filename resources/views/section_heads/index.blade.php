@@ -41,7 +41,38 @@
 
   <section class="shd-section create-dialog-wrapper">
     <div class="create-dialog">
-      Dialog!
+      <div class="header">Create Section Heads</div>
+      <div class="main">
+        <select id="shd_section_select" name="" class="browser-default section-head-element">
+          <option value="">Select School Section</option>
+          @foreach($sections as $key => $section)
+          <option value="{{$section->id}}">{{$section->sectionName}}</option>
+          @endforeach
+        </select>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <input type="text" name="sectionHead" id="sectionHead" class="validate">
+            <label for="otherName">Name of Section Head</label>
+          </div>
+          <div class="file-field input-field col s12">
+            <div class="btn {{ $school->themeColor }} lighten-1">
+              <span>Upload Signature</span>
+              <input type="file" accept="image/*" name="sectionHeadSign" id="sectionHeadSign">
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text" placeholder="Signature of Section Head">
+            </div>
+          </div>
+          <div class="error-message"></div>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="button-wrapper">
+          <span class="submit-btn">Submit</span>
+          <span class="cancel-btn">Cancel</span>
+        </div>
+      </div>
     </div>
   </section>
 
