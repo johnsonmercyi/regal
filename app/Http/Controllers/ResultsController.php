@@ -306,7 +306,7 @@ class ResultsController extends Controller
 
         $shwData = DB::select("SELECT h1, h2, w1, w2 FROM students_hw WHERE student_id=$student->id AND academic_session_id=$formItems[sessionId] AND term=$formItems[termId]");
 
-        dd($shwData);
+        // dd($shwData);
 
         return response()->json([
                                 'studentRes'=>$studentDetails, 
