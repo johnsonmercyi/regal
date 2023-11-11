@@ -32,29 +32,27 @@ class SectionHeadsController extends Controller
    * @return \Illuminate\Http\Response
    */
   public function store(School $school, Request $request) {
-    $data = $request->input('data');
-    $sectionHeadSign = $request->input('section_head_sign');
+    $data = $request->all();
+    $sectionId = $data['sectionSelect'];
+    $sectionHead = $data['sectionHead'];
+    $sectionHeadSign = $data['sectionHeadSign'];
     
-    dd($data, $sectionHeadSign, $request->all());
-
-    $sectionHead = null;
+    // dd("Data: ", $data);
+    // $sectionHead = null;
     try {
-      // dd($data['section_head_sign'], isset($data['section_head_sign']), $request->file($data['section_head_sign']));
 
-      // Log::info(print_r($request->all(), true));
-
-      dd($data);
+      // dd($data);
 
       
-      if (isset($data['section_head_sign'])) {
-        $sectionHeadName = str_replace(" ", '_', $data['section_head']);
-        $clientExt = $request->file('section_head_sign')->getClientOriginalExtension();
+      if (isset($sectionHeadSign)) {
+        $sectionHeadName = str_replace(" ", '_', $sectionHead);
+        $clientExt = $request->file('sectionHeadSign')->getClientOriginalExtension();
         $fileNameToStore = $sectionHeadName . '_' . date('h_i_s_d_m_Y') . '.' . $clientExt;
-        $path = $request->file('section_head_sign')->storeAs('public/images/' . $school->prefix . '/photo/school', $fileNameToStore);
+        $path = $request->file('sectionHeadSign')->storeAs('public/images/' . $school->prefix . '/photo/school', $fileNameToStore);
 
-        $data['section_head_sign'] = $fileNameToStore;
+        $sectionHeadSign = $fileNameToStore;
 
-        $sectionHead = DB::insert("INSERT INTO section_heads (section_id, school_id, name, signature) VALUES ($data[section], $school->id, '$data[section_head]', '$data[section_head_sign]')");
+        $sectionHead = DB::insert("INSERT INTO section_heads (section_id, school_id, name, signature) VALUES ($sectionId, $school->id, '$sectionHead', '$sectionHeadSign')");
       }
     } catch (\Throwable $e) {
       return response()->json(["error" => $e->getMessage()]);

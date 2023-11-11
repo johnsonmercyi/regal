@@ -1,6 +1,10 @@
 
 document.addEventListener('DOMContentLoaded', function (event) {
-  const sectionSelect = document.querySelector('#shd_section_select');
+  const sectionHeadForm = document.querySelector('#sectionHeadForm');
+  const addNewButton = document.querySelector('.add-new-btn');
+  const createDialog = document.querySelector('.create-dialog-wrapper');
+  const shdSection2 = document.querySelector('.shd-section-2');
+  const sectionSelect = document.querySelector('#sectionSelect');
   const sectionHeadNameField = document.querySelector('.create-dialog .main #sectionHead');
   const sectionHeadSignField = document.querySelector('#sectionHeadSign');
   const submitButton = document.querySelector('.create-dialog .footer .submit-btn');
@@ -8,32 +12,53 @@ document.addEventListener('DOMContentLoaded', function (event) {
   const errorMessage = document.querySelector('.create-dialog .main .error-message');
   const schoolId = document.querySelector('.section-heads #schoolId');
 
+  addNewButton && addNewButton.addEventListener('click', () => {
+    errorMessage.innerHTML = "";
+    setElementStyle(createDialog, "display", "flex");
+    animate(createDialog, 0, 500, 1, "ease-in-out", [
+      { opacity: 1 }
+    ]);
+  });
+
   submitButton && submitButton.addEventListener('click', () => {
     let section = sectionSelect.value.trim();
+    let sectionName = sectionSelect.options[sectionSelect.selectedIndex].textContent;
     let sectionHead = sectionHeadNameField.value.trim();
     let sectionHeadSign = sectionHeadSignField.files[0];
 
-    console.log(section, sectionHead, sectionHeadSign);
-
     if (section && sectionHead && sectionHeadSign) {
+      submitButton.classList.add('disabled');
+      submitButton.classList.add('load');
+      cancelButton.classList.add('disabled');
+
       errorMessage.innerHTML = "";
 
-      const data = {
-        section: section,
-        section_head: sectionHead
-      }
+      let sectionForm = new FormData(sectionHeadForm);
 
-      const formData = new FormData();
-      formData.append('section_head_sign', sectionHeadSign);
-      formData.append('data', JSON.stringify(data));
-      
-      httpClient(`create`, 
-      HTTP.METHODS.POST, formData).then((resp)=> {
-        console.log("Response: ", resp);
-      }, (error)=> {
-        //error
-        console.log("Error: ", error);
-      });
+      httpClient(`create`,
+        HTTP.METHODS.POST, sectionForm).then((resp) => {
+          if (resp.ok && resp.status === 200) {
+            submitButton.classList.remove('load');
+            submitButton.classList.add('success');
+
+            //delay a bit and exit dialog
+            setTimeout(() => {
+              cancelButton && cancelButton.click();
+
+              // Reset the form
+              sectionHeadForm.reset();
+              submitButton.classList.remove('disabled');
+              submitButton.classList.remove('success');
+              cancelButton.classList.remove('disabled');
+              
+              // Add the new section head to display container
+              createSectionHeadCard(sectionHead, sectionName);
+            }, 500);
+          }
+        }, (error) => {
+          //error
+          console.log("Error: ", error);
+        });
     } else {
       errorMessage.innerHTML = "Please fill the required fields";
       animate(errorMessage, 0, 500, 1, "ease-in-out", [
@@ -41,6 +66,63 @@ document.addEventListener('DOMContentLoaded', function (event) {
       ]);
     }
   });
+
+  cancelButton && cancelButton.addEventListener('click', () => {
+    animate(createDialog, 0, 500, 1, "ease-in-out", [
+      { opacity: 0 }
+    ], () => {
+      setElementStyle(createDialog, "display", "none");
+    });
+  });
+
+  function createSectionHeadCard(sectionHeadName, sectionName) {
+
+    const dataBar = document.createElement('div');
+    dataBar.classList.add('data-bar');
+    dataBar.style.opacity = 0;
+
+    const name = document.createElement('span');
+    name.classList.add('name');
+    name.innerHTML = sectionHeadName;
+
+    const section = document.createElement('span');
+    section.classList.add('section');
+    section.innerHTML = sectionName.toLowerCase();
+
+    const separator1 = document.createElement('span');
+    separator1.classList.add('separator');
+    separator1.innerHTML = "|";
+
+    const actionBtns = document.createElement('div');
+    actionBtns.classList.add("action-btns");
+
+    const editBtn = document.createElement('i');
+    editBtn.classList.add("material-icons", "center", "edit-btn");
+    editBtn.innerHTML = "edit";
+    editBtn.setAttribute("title", "Edit Record");
+
+    const separator2 = document.createElement('span');
+    separator2.classList.add('separator');
+    separator2.innerHTML = "|";
+
+    const deleteBtn = document.createElement('i');
+    deleteBtn.classList.add("material-icons", "center", "delete-btn");
+    deleteBtn.innerHTML = "delete";
+    deleteBtn.setAttribute("title", "Delete Record");
+
+    actionBtns.appendChild(editBtn);
+    actionBtns.appendChild(separator2);
+    actionBtns.appendChild(deleteBtn);
+
+    dataBar.appendChild(name);
+    dataBar.appendChild(section);
+    dataBar.appendChild(separator1);
+    dataBar.appendChild(actionBtns);
+
+    shdSection2.appendChild(dataBar);
+
+    animate(dataBar, 500, 500, 1, "ease-in-out", [{ opacity: 1 }])
+  }
 
   function animate(
     el,
@@ -102,14 +184,11 @@ document.addEventListener('DOMContentLoaded', function (event) {
       ...options,
       method: method,
       headers: {
-        'Content-Type': 'application/json',
+        // 'Content-Type': 'application/json',
         'X-CSRF-TOKEN': csrfToken
       },
       // body: [...data]
-      body: {
-        data: JSON.stringify(data.get('data')),
-        sign: data.get('section_head_sign')
-      }
+      body: data
     });
   }
 
