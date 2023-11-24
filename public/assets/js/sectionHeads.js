@@ -1,16 +1,21 @@
 
 document.addEventListener('DOMContentLoaded', function (event) {
-  const sectionHeadForm = document.querySelector('#sectionHeadForm');
+
+  // Create Dialog Members
   const addNewButton = document.querySelector('.add-new-btn');
   const createDialog = document.querySelector('.create-dialog-wrapper');
+
+  const sectionHeadForm = document.querySelector('.create-dialog #sectionHeadForm');
   const shdSection2 = document.querySelector('.shd-section-2');
-  const sectionSelect = document.querySelector('#sectionSelect');
+  const sectionSelect = document.querySelector('.create-dialog #sectionSelect');
   const sectionHeadNameField = document.querySelector('.create-dialog .main #sectionHead');
-  const sectionHeadSignField = document.querySelector('#sectionHeadSign');
+  const sectionHeadSignField = document.querySelector('.create-dialog #sectionHeadSign');
   const submitButton = document.querySelector('.create-dialog .footer .submit-btn');
   const cancelButton = document.querySelector('.create-dialog .footer .cancel-btn');
   const errorMessage = document.querySelector('.create-dialog .main .error-message');
-  const schoolId = document.querySelector('.section-heads #schoolId');
+  const schoolId = document.querySelector('.create-dialog .section-heads #schoolId');
+
+  // Update Dialog Members
 
   addNewButton && addNewButton.addEventListener('click', () => {
     errorMessage.innerHTML = "";
@@ -40,6 +45,8 @@ document.addEventListener('DOMContentLoaded', function (event) {
           if (resp.ok && resp.status === 200) {
             submitButton.classList.remove('load');
             submitButton.classList.add('success');
+
+            console.log("Response: ", resp);
 
             //delay a bit and exit dialog
             setTimeout(() => {
