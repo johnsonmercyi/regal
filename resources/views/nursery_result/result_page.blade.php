@@ -18,7 +18,7 @@
       <section class="header">
         <div class="school-name-logo-wrapper">
           <div class="logo">
-            <img width="100%" src="http://localhost:8000/storage/images/RTNPS/photo/school/schoolLogo_01_10_20_03_11_2022.jpg">
+            <img width="100%" src="http://localhost:8001/storage/images/RTNPS/photo/school/schoolLogo_01_10_20_03_11_2022.jpg">
           </div>
           <div class="school-name-title-wrapper">
             <span class="school-name">
@@ -133,7 +133,9 @@
 
               <td class="item item-1 width_100">
                 <div class="label label-1" style="width: 30vw;">HEAD TEACHER'S SIGNATURE:</div>
-                <div class="val val-1" style="width: 50%;"></div>
+                <div class="val val-1" style="width: 50%;">
+                  <img width=30% height=20rem src="data:image/jpeg;base64, {{ base64_encode($sectionHeadSignFile) }}" alt="Signature" />
+                </div>
               </td>
             </tr>
           </table>
@@ -141,7 +143,14 @@
       </section>
 
       <section class="content">
+        <?php $count=0;?>
         @foreach($subjectCategories as $key => $category)
+        <?php if ($count > 0 && $count % 3 === 0) {?>
+          <?php if ($count === 3) {?>
+            <br><br><br><br><br><br>
+          <?php } ?>
+        <?php } $count ++;?>
+
         <div class="scores scores-{{$key+1}}">
           <span class="subject-category">{{$category->title}}</span>
           <div class="subjects subjects-1">
@@ -161,7 +170,7 @@
         @endforeach
       </section>
 
-      <div class="footer">
+      <div class="footer" style="margin-top: 2rem;">
         <div class="keys">
           <span class="title">KEY</span>
           <div class="wrapper wrapper-1">

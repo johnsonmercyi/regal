@@ -530,13 +530,20 @@ document.addEventListener('DOMContentLoaded', function () {
      * CALLED ON THE showResultTab fxn and showClassResultTab fxn
      * ***************** */
     function resultCalc(overAll, resultRes) {
-        let overallArr = overAll.reduce((acc, item) => { return [...acc, ...item] }, []);
+        // console.log("OVERALL: ", overAll);
+        // console.log("RESULT SET: ", resultRes);
+        let overallArr = overAll.reduce((acc, item) => { 
+            return [...acc, ...item] 
+        }, []);
+        
         let overAllResult = (() => {
             let idArr = overallArr.map(({ student_id }) => student_id);
             let idSet = new Set(idArr);
             let buildRes = buildResult(overallArr, classChoiceForm.termId);
             return [buildRes, idSet.size];
         })()
+
+        
         let positionedRes = buildResult(resultRes, classChoiceForm.termId);
         // console.log(positionedRes);
         return [overAllResult, positionedRes];
@@ -570,7 +577,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let resultTab = window.open("", "window=200,height=100");
         resultTab.focus();
         let resultSet = resultCalc(resp.overAllScores, resp.resultRes);
-        // console.log(resultSet)
+        // console.log("RESULT SET: ", resultSet)
         let finalResultSheet = resultSheetFunction(resp, resultSet[1], resultSet[0]);
 
         // const resultComments = buildResultComments(resp.studentComments);
@@ -657,6 +664,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let studentDetails = resp.studentRes.filter(student => student.id == resp.selectedStudent[0].student_id);
         // console.log(studentDetails);
         let studentPositionedRes = positionedRes.filter(res => res.id == studentDetails[0].id);
+        // console.log("TEST: ", studentPositionedRes);
         let stdPos = suffixer(studentPositionedRes[0].Position);
         let overallBuild = overAllResult[0].filter(res => res.id == studentDetails[0].id);
         let stdOverPos = suffixer(overallBuild[0].Position);
@@ -748,6 +756,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const resultTableHead = `<table border='1' style='font-size:11px;text-align:center;border-radius:5px;'>
                                 <tr><th style='font-size:16px;'>Subject</th>${assessHead}<th>${checkAnnual ? 'Average' : 'Total'}<br>(100)</th>
+                                <th>Subject Position</th>
                                 <th>Grade</th>
                                 <th>Comment</th><th>Subject Teacher's Signature</th>${resultBody}
                                 <tfoot><tr><th colspan='100%' style='text-align:left;'>${gradeFooter}</th></tr></tfoot>
@@ -926,8 +935,10 @@ function buildResult(result, termId) {
         let idSet = new Set(result.map(({ student_id }) => student_id));
         return [...idSet];
     }
+
     for (const student of allStudentsId()) {
         let studentSubjectRes = result.filter(res => res.student_id == student);
+
         let subIdSet = new Set(studentSubjectRes.map(({ subject_id }) => subject_id));
         // subIdSet unique set of id for all subjects
         let studentTotal = 0;
@@ -938,13 +949,13 @@ function buildResult(result, termId) {
                 // Calculate Annual Average for each subject and add to total
                 let allSubjectTerms = studentSubjectRes.filter(subj => subj.subject_id == subId);
                 let subjectTotal = 0;
-                allSubjectTerms.forEach(({ TOTAL }) => subjectTotal += parseInt(TOTAL));
+                allSubjectTerms.forEach(({ TOTAL }) => subjectTotal += Number(TOTAL));
                 let subjectAverage = subjectTotal / allSubjectTerms.length;
                 studentTotal += subjectAverage;
 
             })
         } else {
-            studentSubjectRes.forEach(({ TOTAL }) => studentTotal += parseInt(TOTAL));
+            studentSubjectRes.forEach(({ TOTAL }) => studentTotal += Number(TOTAL));
         }
         studentAverage = studentTotal / subIdSet.size;
         let studentBuiltRes = {

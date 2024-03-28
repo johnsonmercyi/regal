@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\School;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class NurseryResultController extends Controller
 {
@@ -90,6 +91,18 @@ class NurseryResultController extends Controller
         WHERE academic_session_id=$sessionId
         AND class_id=$classId");
 
+        $sectionHeadData = DB::select("SELECT * FROM school_sections WHERE id=2");
+        $sectionHeadName = $sectionHeadData[0]->sectionHead;
+        $sectionHeadSign = $sectionHeadData[0]->sectionHeadSign;
+
+        $filePath = 'images/RTNPS/photo/school/'.$sectionHeadSign;
+        
+        if (Storage::disk('public')->exists($filePath)) {
+            $sectionHeadSignFile = Storage::disk('public')->get($filePath);
+        } else {
+            $sectionHeadSignFile = null;
+        }
+
         // dd($startDate, $comments, $classTeacher);
 
         // foreach ($variable as $key => $value) {
@@ -100,7 +113,7 @@ class NurseryResultController extends Controller
 
         // substr_replace("", "", 0, 7);
 
-        return view('nursery_result.result_page', compact('term', 'session', 'studentName', 'studentClass', 'age', 'subjectCategories', 'subjects', 'startDate', 'comments', 'classTeachers', 'shwData', 'school'));
+        return view('nursery_result.result_page', compact('term', 'session', 'studentName', 'studentClass', 'age', 'subjectCategories', 'subjects', 'startDate', 'comments', 'classTeachers', 'shwData', 'school', 'sectionHeadName', 'sectionHeadSignFile'));
     }
 
     public function fetchStudents()
