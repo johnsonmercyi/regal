@@ -755,10 +755,12 @@ document.addEventListener('DOMContentLoaded', function () {
         resp.gradingFormat.forEach(grade => { gradeFooter += `${grade.description}=(${grade.minScore}-${grade.maxScore})  &nbsp;` });
 
         const resultTableHead = `<table border='1' style='font-size:11px;text-align:center;border-radius:5px;'>
-                                <tr><th style='font-size:16px;'>Subject</th>${assessHead}<th>${checkAnnual ? 'Average' : 'Total'}<br>(100)</th>
+                                <tr>
+                                <th style='font-size:16px;'>Subject</th>${assessHead}<th>${checkAnnual ? 'Average' : 'Total'}<br>(100)</th>
                                 <th>Subject Position</th>
                                 <th>Grade</th>
-                                <th>Comment</th><th>Subject Teacher's Signature</th>${resultBody}
+                                <th>Comment</th>
+                                <th>Subject Teacher's Signature</th>${resultBody}
                                 <tfoot><tr><th colspan='100%' style='text-align:left;'>${gradeFooter}</th></tr></tfoot>
                                 </table>`;
 
@@ -865,13 +867,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 return { ...acc, [res.subject_id]: { ...acc[res.subject_id], [res.term_id]: res } }
             }, {})
 
-            // console.log(annualResultArr)
             // Build the Annual Result Table
             for (const [key, subject] of Object.entries(annualResObj)) {
                 let classSubjRes = annualResultArr.filter(subjRes => subjRes.subject_id == key).sort(totalSort);
                 let posRes = positioner(classSubjRes, 'TOTAL')
                 let studentSubjPos = suffixer(posRes.filter(position => position.student_id == studentResult[0].student_id)[0].Position);
-
+                // console.log("SUBJECT POSITION: ", studentSubjPos);
+                
                 let subj = subjects.filter(subj => subj.id == key)[0];
                 let term1 = subject[1] ? +subject[1].TOTAL : 0;
                 let term2 = subject[2] ? +subject[2].TOTAL : 0;
@@ -885,7 +887,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     <td>${subject[2] ? term2 : '-'}</td>
                     <td>${subject[3] ? term3 : '-'}</td>
                     <td>${annualAverage}</td>
-                    <td>${grade ? grade.grade : '-'}</td><td>${grade ? grade.description : '-'}</td>
+                    <td>${studentSubjPos ? studentSubjPos : '-'}</td>
+                    <td>${grade ? grade.grade : '-'}</td>
+                    <td>${grade ? grade.description : '-'}</td>
                     <td>${subj ? (subj.signature ?
                         `<img src="${homepg + subj.signature}" style="height:14px;width:81px;" >`
                         : '-') : '-'}</td></tr>`;
